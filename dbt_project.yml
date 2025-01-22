@@ -199,7 +199,7 @@ vars:
   BLOCK_EXPLORER_ABI_URL: "https://explorer-kintsugi.roninchain.com/v2/2020/contract/"
   BLOCK_EXPLORER_ABI_URL_SUFFIX: "/abi"
 
-  BRONZE_CONTRACT_ABIS_FULL_REFRESH: True
+  BRONZE_CONTRACT_ABIS_FULL_REFRESH: True #comment out after FR is complete
 
   ### DECODER_PACKAGE VARIABLES END ###
 
