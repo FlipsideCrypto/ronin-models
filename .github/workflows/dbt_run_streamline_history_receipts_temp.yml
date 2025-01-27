@@ -4,7 +4,7 @@ run-name: dbt_run_streamline_history_receipts_temp
 on:
   workflow_dispatch:
   schedule:
-    # Runs every 6 hours (see https://crontab.guru)
+    # Runs every 3 hours (see https://crontab.guru)
     - cron: '1 */3 * * *'
 
 env:
