@@ -1,3 +1,3 @@
 packages:
   - git: https://github.com/FlipsideCrypto/fsc-evm.git
-    revision: "add/async-request-param"
+    revision: v3.22.0
