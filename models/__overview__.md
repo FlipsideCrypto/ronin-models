@@ -1,9 +1,9 @@
 {% docs __overview__ %}
 
-# Welcome to the Flipside Crypto Core Models Documentation!
+# Welcome to the Flipside Crypto Ronin Models Documentation!
 
 ## **What does this documentation cover?**
-The documentation included here details the design of the Core tables and views available via [Flipside Crypto.](https://flipsidecrypto.xyz/) For more information on how these models are built, please see [the github repository.](https://github.com/FlipsideCrypto/ronin-models)
+The documentation included here details the design of the Ronin tables and views available via [Flipside Crypto.](https://flipsidecrypto.xyz/) For more information on how these models are built, please see [the github repository.](https://github.com/FlipsideCrypto/ronin-models)
 
 ## **How do I use these docs?**
 The easiest way to navigate this documentation is to use the Quick Links below. These links will take you to the documentation for each table, which contains a description, a list of the columns, and other helpful information.
