@@ -24,7 +24,7 @@ concurrency:
 jobs:
   run_dbt_jobs:
     runs-on: ubuntu-latest
-    environment: 
+    environment:
       name: workflow_test
 
     steps:
@@ -39,8 +39,12 @@ jobs:
         run: |
           pip install -r requirements.txt
           dbt deps
-      
-      - name: Run ABI Models
+
+      - name: Get new contract ABIs
+        run: |
+          dbt run --vars '{"STREAMLINE_INVOKE_STREAMS":True}' -m "fsc_evm,tag:bronze_abis" "fsc_evm,tag:streamline_abis_complete" "fsc_evm,tag:streamline_abis_realtime"
+
+      - name: Update ABI Models
         run: |
           dbt run -m "fsc_evm,tag:silver_abis" "fsc_evm,tag:gold_abis"
 
