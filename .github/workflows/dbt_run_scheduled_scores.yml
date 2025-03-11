@@ -41,4 +41,4 @@ jobs:
           dbt deps
       - name: Update scores
         run: |
-          dbt run -m "fsc_evm,tag:scores"
+          dbt run -m "fsc_evm,tag:scores" --vars '{"INCLUDE_GAMING_METRICS": true}'
