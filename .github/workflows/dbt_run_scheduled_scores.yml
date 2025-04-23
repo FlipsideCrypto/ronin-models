@@ -42,3 +42,10 @@ jobs:
       - name: Update scores
         run: |
           dbt run -m "fsc_evm,tag:scores" --vars '{"INCLUDE_GAMING_METRICS": true}'
+
+  notify-failure:
+    needs: [run_dbt_jobs]
+    if: failure()
+    uses: FlipsideCrypto/fsc-evm/.github/workflows/slack_notify.yml@main
+    secrets:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
