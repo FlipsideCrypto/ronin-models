@@ -70,22 +70,30 @@ models:
       columns: true
     +on_schema_change: "append_new_columns"
     main_package:
-      +enabled: false
-      core:
+      +enabled: false # disable main_package by default, enabled other packages as needed
+      admin:
         +enabled: true
+      core:
+        +enabled: true # enable subpackages, as needed
       github_actions:
+        +enabled: true
+      labels:
+        +enabled: true
+      observability:
         +enabled: true
       prices:
         +enabled: true
       utils:
-        +enabled: true
-      labels:
         +enabled: true
     decoder_package:
       +enabled: false
       abis:
         +enabled: true
       decoded_logs:
+        +enabled: true
+    curated_package:
+      +enabled: false
+      stats:
         +enabled: true
     scores_package:
       +enabled: true
@@ -96,11 +104,9 @@ vars:
   STREAMLINE_USE_DEV_FOR_EXTERNAL_TABLES: False
   UPDATE_UDFS_AND_SPS: False
   UPDATE_SNOWFLAKE_TAGS: True
-  OBSERV_FULL_TEST: False
-  WAIT: 0
   HEAL_MODEL: False
   HEAL_MODELS: []
-  START_GHA_TASKS: False
+  MAIN_CORE_RECEIPTS_BY_HASH_ENABLED: True
 
   #### STREAMLINE 2.0 BEGIN ####
 
@@ -127,88 +133,3 @@ vars:
         - DBT_CLOUD_RONIN # replace with the name of the chain
 
   #### STREAMLINE 2.0 END ####
-
-  #### FSC_EVM BEGIN ####
-
-  # Please visit https://github.com/FlipsideCrypto/fsc-evm/wiki for more information on required and optional variables
-
-  ### GLOBAL VARIABLES BEGIN ###
-
-  ## REQUIRED
-  GLOBAL_PROD_DB_NAME: "ronin"
-  GLOBAL_NODE_URL: "{api_url}"
-  GLOBAL_NODE_SECRET_PATH: "Vault/prod/ronin/tatum/mainnet_new"
-  GLOBAL_BLOCKS_PER_HOUR: 1200
-  GLOBAL_WRAPPED_ASSET_ADDRESS: "0xe514d9deb7966c8be0ca922de8a064264ea6bcd4" #WRON
-
-  ## OPTIONAL
-  GLOBAL_USES_RECEIPTS_BY_HASH: True
-  GLOBAL_AVG_TXS_PER_BLOCK: 45
-  GLOBAL_START_UP_BLOCK: 38633701 #October 1st, 2024
-  GLOBAL_CHAINHEAD_DELAY: 6
-
-  ### GLOBAL VARIABLES END ###
-
-  ### MAIN_PACKAGE VARIABLES BEGIN ###
-
-  ### CORE ###
-  ## REQUIRED
-
-  ## OPTIONAL
-  TRACES_FULL_RELOAD_START_BLOCK: 38633701
-
-  # GOLD_FULL_REFRESH: True #comment out after FR is complete / for prod
-  # SILVER_FULL_REFRESH: True #comment out after FR is complete / for prod
-  # BRONZE_FULL_REFRESH: True #comment out after FR is complete / for prod
-
-  # BLOCKS_COMPLETE_FULL_REFRESH: True
-  # CONFIRM_BLOCKS_COMPLETE_FULL_REFRESH: True
-  # TRACES_COMPLETE_FULL_REFRESH: True
-  # RECEIPTS_BY_HASH_COMPLETE_FULL_REFRESH: True
-  # TRANSACTIONS_COMPLETE_FULL_REFRESH: True
-
-  BLOCKS_TRANSACTIONS_HISTORY_SQL_LIMIT: 1000000
-  BLOCKS_TRANSACTIONS_HISTORY_PRODUCER_BATCH_SIZE: 3000
-  BLOCKS_TRANSACTIONS_HISTORY_WORKER_BATCH_SIZE: 1000
-
-  RECEIPTS_BY_HASH_HISTORY_ASYNC_CONCURRENT_REQUESTS: 20
-  RECEIPTS_BY_HASH_HISTORY_SQL_LIMIT: 1800000
-  RECEIPTS_BY_HASH_HISTORY_PRODUCER_BATCH_SIZE: 10500
-  RECEIPTS_BY_HASH_HISTORY_WORKER_BATCH_SIZE: 1500
-  RECEIPTS_BY_HASH_HISTORY_ORDER_BY_CLAUSE: "ORDER BY partition_key DESC, block_number DESC"
-
-  TRACES_HISTORY_ASYNC_CONCURRENT_REQUESTS: 1
-  TRACES_HISTORY_SQL_LIMIT: 10000
-  TRACES_HISTORY_PRODUCER_BATCH_SIZE: 1
-  TRACES_HISTORY_WORKER_BATCH_SIZE: 1
-
-  CONFIRM_BLOCKS_HISTORY_SQL_LIMIT: 1000000
-  CONFIRM_BLOCKS_HISTORY_PRODUCER_BATCH_SIZE: 3000
-  CONFIRM_BLOCKS_HISTORY_WORKER_BATCH_SIZE: 1000
-
-  ### PRICES ###
-  ## REQUIRED
-  PRICES_NATIVE_SYMBOLS: "RON"
-  PRICES_PROVIDER_PLATFORMS: ["ronin"]
-
-  ### LABELS ###
-
-  ### MAIN_PACKAGE VARIABLES END ###
-
-  ### DECODER_PACKAGE VARIABLES BEGIN ###
-
-  ## ABIS
-
-  DECODER_ABIS_BLOCK_EXPLORER_NAME: "RoninChain"
-  DECODER_ABIS_BLOCK_EXPLORER_URL: "https://explorer-kintsugi.roninchain.com/v2/2020/contract/"
-  DECODER_ABIS_BLOCK_EXPLORER_URL_SUFFIX: "/abi"
-  DECODER_ABIS_BLOCK_EXPLORER_SECRET_PATH: ""
-  DECODER_ABIS_RELEVANT_CONTRACT_LIMIT: 50
-  DECODER_ABIS_RELEVANT_CONTRACT_COUNT: 200
-  DECODER_ABIS_BRONZE_API_TABLE_ENABLED: True # this is for all existing non eth repos with a bronze_api__contract_abis model
-
-
-  # BRONZE_CONTRACT_ABIS_FULL_REFRESH: True #comment out after FR is complete / for prod
-
-  ### DECODER_PACKAGE VARIABLES END ###
-#### FSC_EVM END ####
