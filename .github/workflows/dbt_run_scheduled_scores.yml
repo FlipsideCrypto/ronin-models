@@ -16,5 +16,5 @@ jobs:
     with:
       command_name: Run Scores Models
       command: |
-        dbt run -m "fsc_evm,tag:scores"
+        dbt run -m "fsc_evm,tag:scores" --vars '{"INCLUDE_GAMING_METRICS":True}'
     secrets: inherit
